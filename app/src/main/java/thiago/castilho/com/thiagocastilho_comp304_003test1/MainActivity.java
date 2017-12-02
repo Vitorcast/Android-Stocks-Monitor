@@ -1,8 +1,10 @@
 package thiago.castilho.com.thiagocastilho_comp304_003test1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -45,13 +47,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void goToChart(View view){
+        SharedPreferences pfrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = pfrefs.edit();
 
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        Gson gson = new Gson();
-        String object = gson.toJson(adapter.getSelectedItems());
-        editor.putString("SELECTED_STOCKS", object);
+        for(Model stock : adapter.getSelectedItems()){
+            editor.putString(stock.getName(), stock.getName());
+        }
+
         editor.commit();
-        Toast.makeText(this, object, Toast.LENGTH_SHORT).show();
+
+        startActivity(new Intent(this, ChartActivity.class));
     }
 }
