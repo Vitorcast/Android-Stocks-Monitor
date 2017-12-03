@@ -19,17 +19,17 @@ import java.util.List;
 
 public class CheckBoxListAdapter extends BaseAdapter {
     private Context context;
-    private List<Model> arrayList;
+    private List<Stock> arrayList;
     private LayoutInflater inflater;
     private Integer selectedId = -1;
     private List<Integer> selectedIds ;
-    private List<Model> selectedItems;
+    private List<Stock> selectedItems;
 
-    public List<Model> getSelectedItems(){
+    public List<Stock> getSelectedItems(){
         return selectedItems;
     }
 
-    public CheckBoxListAdapter(Context context, List<Model> arrayList) {
+    public CheckBoxListAdapter(Context context, List<Stock> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
         inflater = LayoutInflater.from(context);
@@ -57,11 +57,11 @@ public class CheckBoxListAdapter extends BaseAdapter {
         return selectedId;
     }
 
-    public Model getSelectedItem(){
+    public Stock getSelectedItem(){
         if(selectedId != -1){
-            for(Model model:arrayList){
-                if(model.getId() == selectedId){
-                    return model;
+            for(Stock stock:arrayList){
+                if(stock.getId() == selectedId){
+                    return stock;
                 }
             }
         }
@@ -99,11 +99,11 @@ public class CheckBoxListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder)view.getTag();
         }
 
-        viewHolder.tvItemView.setText(((Model)arrayList.get(i)).getName());
-        viewHolder.cbItemView.setChecked(((Model)arrayList.get(i)).getValue() > 0);
+        viewHolder.tvItemView.setText(((Stock)arrayList.get(i)).getName());
+        viewHolder.cbItemView.setChecked(((Stock)arrayList.get(i)).getValue() > 0);
 
-        viewHolder.tvItemView.setTag(((Model)arrayList.get(i)).getName());
-        viewHolder.cbItemView.setTag(((Model)arrayList.get(i)).getId());
+        viewHolder.tvItemView.setTag(((Stock)arrayList.get(i)).getName());
+        viewHolder.cbItemView.setTag(((Stock)arrayList.get(i)).getId());
 
         viewHolder.cbItemView.setOnClickListener(new View.OnClickListener() {
             @Override
